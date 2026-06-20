@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abdur Rehman — Data Analyst &amp; Data Scientist</title>
+<meta name="description" content="Portfolio of Abdur Rehman — Data Analyst / Data Scientist based in Dubai, UAE. Power BI dashboards, ML projects, and engineering background.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #161B26;
+    --bg-elev: #1C2230;
+    --bg-elev-2: #232A3B;
+    --line: #2A3142;
+    --text: #EDEFF4;
+    --text-dim: #AEB4C2;
+    --text-mute: #6B7280;
+    --accent: #3DD9C4;
+    --accent-soft: rgba(61,217,196,0.12);
+    --accent-dim: #2A9D8F;
+    --warn: #F08C6A;
+    --maxw: 980px;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--accent); color:#0B0E14; }
+  a{ color:inherit; text-decoration:none; }
+  img{ max-width:100%; display:block; }
+
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(22,27,38,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav .wrap{ display:flex; align-items:center; justify-content:space-between; padding-top:16px; padding-bottom:16px; }
+  .nav-logo{ font-family:var(--mono); font-weight:600; font-size:15px; letter-spacing:0.02em; }
+  .nav-logo span{ color:var(--accent); }
+  .nav-links{ display:flex; gap:28px; list-style:none; font-size:14px; color:var(--text-dim); }
+  .nav-links a:hover{ color:var(--accent); }
+  .nav-cta{
+    font-family:var(--mono); font-size:13px; padding:8px 16px;
+    border:1px solid var(--accent-dim); border-radius:4px; color:var(--accent);
+    transition:background 0.15s, color 0.15s;
+  }
+  .nav-cta:hover{ background:var(--accent); color:#0B0E14; }
+  @media (max-width:720px){ .nav-links{ display:none; } }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding:88px 0 64px; border-bottom:1px solid var(--line); position:relative; overflow:hidden; }
+  .hero::before{
+    content:""; position:absolute; top:-200px; right:-200px; width:560px; height:560px;
+    background:radial-gradient(circle, rgba(61,217,196,0.10) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:13px; color:var(--accent);
+    letter-spacing:0.08em; text-transform:uppercase; margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:""; width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px var(--accent-soft); }
+  .hero h1{
+    font-size:clamp(36px, 6vw, 58px); font-weight:800; line-height:1.05; letter-spacing:-0.02em;
+    max-width:780px;
+  }
+  .hero h1 .accent{ color:var(--accent); }
+  .hero p.lede{
+    margin-top:22px; font-size:18px; color:var(--text-dim); max-width:600px; line-height:1.65;
+  }
+  .hero-meta{
+    margin-top:32px; display:flex; flex-wrap:wrap; gap:10px;
+  }
+  .pill{
+    font-family:var(--mono); font-size:12.5px; color:var(--text-dim);
+    border:1px solid var(--line); padding:7px 13px; border-radius:100px;
+    display:flex; align-items:center; gap:7px;
+  }
+  .pill b{ color:var(--text); font-weight:600; }
+  .hero-actions{ margin-top:36px; display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--sans); font-weight:600; font-size:14.5px; padding:13px 24px;
+    border-radius:6px; display:inline-flex; align-items:center; gap:8px;
+    transition:transform 0.15s, background 0.15s, border-color 0.15s;
+  }
+  .btn-primary{ background:var(--accent); color:#0B0E14; }
+  .btn-primary:hover{ transform:translateY(-1px); background:#52E6D4; }
+  .btn-ghost{ border:1px solid var(--line); color:var(--text); }
+  .btn-ghost:hover{ border-color:var(--accent-dim); color:var(--accent); }
+
+  /* ---------- KPI strip (signature element) ---------- */
+  .kpi-strip{
+    margin-top:56px; display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden;
+  }
+  .kpi{ background:var(--bg-elev); padding:22px 20px; }
+  .kpi .num{
+    font-family:var(--mono); font-size:clamp(20px,2.6vw,28px); font-weight:600; color:var(--accent);
+    font-variant-numeric:tabular-nums;
+  }
+  .kpi .label{ margin-top:6px; font-size:12.5px; color:var(--text-mute); }
+  @media (max-width:720px){ .kpi-strip{ grid-template-columns:repeat(2,1fr);} }
+
+  /* ---------- Section scaffolding ---------- */
+  section{ padding:80px 0; border-bottom:1px solid var(--line); }
+  .section-head{ margin-bottom:44px; max-width:640px; }
+  .section-tag{
+    font-family:var(--mono); font-size:12.5px; color:var(--accent);
+    text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px;
+  }
+  .section-head h2{ font-size:clamp(26px,3.4vw,36px); font-weight:800; letter-spacing:-0.01em; }
+  .section-head p{ margin-top:14px; color:var(--text-dim); font-size:16px; }
+
+  /* ---------- About ---------- */
+  .about-grid{ display:grid; grid-template-columns:120px 1fr; gap:40px; align-items:start; }
+  .avatar{
+    width:120px; height:120px; border-radius:16px; background:linear-gradient(155deg, var(--bg-elev-2), var(--bg-elev));
+    border:1px solid var(--line); display:flex; align-items:center; justify-content:center;
+    font-family:var(--mono); font-weight:700; font-size:34px; color:var(--accent);
+  }
+  .about-text p{ color:var(--text-dim); font-size:16px; margin-bottom:16px; max-width:640px; }
+  .about-text strong{ color:var(--text); font-weight:600; }
+  @media (max-width:640px){ .about-grid{ grid-template-columns:1fr; } .avatar{ width:72px; height:72px; font-size:22px; border-radius:12px; } }
+
+  /* ---------- Skills ---------- */
+  .skill-cols{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .skill-col h3{
+    font-family:var(--mono); font-size:13px; color:var(--text-mute); text-transform:uppercase;
+    letter-spacing:0.06em; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid var(--line);
+  }
+  .skill-col ul{ list-style:none; }
+  .skill-col li{
+    font-size:14.5px; color:var(--text-dim); padding:7px 0; display:flex; align-items:center; gap:9px;
+  }
+  .skill-col li::before{ content:""; width:5px; height:5px; background:var(--accent); border-radius:50%; flex-shrink:0; }
+  @media (max-width:720px){ .skill-cols{ grid-template-columns:1fr; gap:32px; } }
+
+  /* ---------- Experience ---------- */
+  .xp-item{ padding:26px 0; border-top:1px solid var(--line); display:grid; grid-template-columns:170px 1fr; gap:24px; }
+  .xp-item:first-of-type{ border-top:none; }
+  .xp-date{ font-family:var(--mono); font-size:13px; color:var(--text-mute); padding-top:3px; }
+  .xp-role{ font-size:18px; font-weight:700; }
+  .xp-co{ font-size:14.5px; color:var(--accent); margin-top:3px; }
+  .xp-loc{ font-size:13px; color:var(--text-mute); margin-top:2px; }
+  .xp-bullets{ margin-top:12px; list-style:none; }
+  .xp-bullets li{ font-size:14.5px; color:var(--text-dim); padding-left:18px; position:relative; margin-bottom:8px; }
+  .xp-bullets li::before{ content:"→"; position:absolute; left:0; color:var(--accent-dim); }
+  @media (max-width:640px){ .xp-item{ grid-template-columns:1fr; gap:8px; } }
+
+  /* ---------- Projects ---------- */
+  .proj{
+    margin-bottom:64px; border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--bg-elev);
+  }
+  .proj-head{ padding:28px 28px 0; }
+  .proj-kicker{ font-family:var(--mono); font-size:12px; color:var(--text-mute); text-transform:uppercase; letter-spacing:0.07em; }
+  .proj-title{ font-size:23px; font-weight:700; margin-top:8px; }
+  .proj-desc{ color:var(--text-dim); font-size:14.5px; margin-top:10px; max-width:640px; }
+  .proj-tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+  .tag{
+    font-family:var(--mono); font-size:11.5px; color:var(--text-dim); background:var(--bg-elev-2);
+    border:1px solid var(--line); padding:4px 10px; border-radius:5px;
+  }
+  .proj-kpis{ display:flex; flex-wrap:wrap; gap:24px; margin-top:22px; padding:18px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .proj-kpi .num{ font-family:var(--mono); font-weight:600; font-size:19px; color:var(--accent); }
+  .proj-kpi .label{ font-size:12px; color:var(--text-mute); margin-top:3px; }
+  .proj-media{ padding:24px 28px 0; }
+  .proj-shot{ border-radius:8px; border:1px solid var(--line); overflow:hidden; margin-bottom:14px; }
+  .proj-shot img{ width:100%; height:auto; display:block; }
+  .proj-embed-wrap{ border-radius:8px; border:1px solid var(--line); overflow:hidden; background:#0B0E14; }
+  .proj-embed-wrap iframe{ width:100%; border:0; display:block; }
+  .proj-actions{ display:flex; flex-wrap:wrap; gap:12px; padding:24px 28px 28px; }
+  .proj-actions a{
+    font-family:var(--mono); font-size:13px; padding:9px 16px; border-radius:6px; border:1px solid var(--line);
+    color:var(--text-dim); transition:border-color 0.15s, color 0.15s;
+  }
+  .proj-actions a:hover{ border-color:var(--accent); color:var(--accent); }
+  .proj-actions a.primary{ background:var(--accent); color:#0B0E14; border-color:var(--accent); }
+  .proj-actions a.primary:hover{ background:#52E6D4; }
+  .proj-shot-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:640px){ .proj-shot-grid{ grid-template-columns:1fr; } }
+  .shot-caption{ font-size:12px; color:var(--text-mute); margin-top:6px; text-align:center; font-family:var(--mono); }
+
+  .insight-box{ background:var(--accent-soft); border:1px solid rgba(61,217,196,0.25); border-radius:8px; padding:16px 18px; margin-top:18px; }
+  .insight-box .ib-label{ font-family:var(--mono); font-size:11px; color:var(--accent); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px; }
+  .insight-box p{ font-size:14px; color:var(--text-dim); }
+
+  /* ---------- Other Projects (compact cards) ---------- */
+  .mini-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .mini-card{ border:1px solid var(--line); border-radius:10px; padding:24px; background:var(--bg-elev); transition:border-color 0.15s, transform 0.15s; }
+  .mini-card:hover{ border-color:var(--accent-dim); transform:translateY(-2px); }
+  .mini-card h3{ font-size:17px; font-weight:700; }
+  .mini-card p{ font-size:13.5px; color:var(--text-dim); margin-top:8px; }
+  .mini-card .proj-tags{ margin-top:14px; }
+  .mini-card .mini-links{ margin-top:16px; display:flex; gap:14px; }
+  .mini-card .mini-links a{ font-family:var(--mono); font-size:12.5px; color:var(--accent); border-bottom:1px solid var(--accent-dim); padding-bottom:1px; }
+  @media (max-width:640px){ .mini-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- Education ---------- */
+  .edu-item{ display:flex; justify-content:space-between; align-items:baseline; padding:18px 0; border-top:1px solid var(--line); flex-wrap:wrap; gap:6px;}
+  .edu-item:first-of-type{ border-top:none; }
+  .edu-deg{ font-size:16px; font-weight:600; }
+  .edu-school{ font-size:14px; color:var(--text-dim); margin-top:3px; }
+  .edu-date{ font-family:var(--mono); font-size:13px; color:var(--text-mute); }
+
+  /* ---------- Footer / Contact ---------- */
+  footer{ padding:72px 0 56px; }
+  .contact-head h2{ font-size:clamp(28px,4vw,42px); font-weight:800; max-width:600px; letter-spacing:-0.01em; }
+  .contact-head p{ color:var(--text-dim); margin-top:16px; font-size:16px; max-width:520px; }
+  .contact-row{ margin-top:40px; display:flex; flex-wrap:wrap; gap:14px; }
+  .contact-link{
+    font-family:var(--mono); font-size:14px; padding:13px 20px; border:1px solid var(--line); border-radius:7px;
+    display:flex; align-items:center; gap:10px; color:var(--text-dim); transition:border-color 0.15s, color 0.15s;
+  }
+  .contact-link:hover{ border-color:var(--accent); color:var(--accent); }
+  .foot-note{ margin-top:56px; padding-top:24px; border-top:1px solid var(--line); font-size:13px; color:var(--text-mute); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+
+  /* Reveal animation */
+  .reveal{ opacity:0; transform:translateY(16px); transition:opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    html{ scroll-behavior:auto; }
+  }
+
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <div class="nav-logo">AR<span>.</span>DATA</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#dashboards">Dashboards</a></li>
+      <li><a href="#projects">Projects</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Available — Dubai, UAE — Transferable Visa</div>
+    <h1>Abdur Rehman builds <span class="accent">data systems</span> people actually use to decide things.</h1>
+    <p class="lede">Data Analyst / Data Scientist at Etisalat by e&amp;, with a full-stack engineering background. I turn raw telecom, healthcare, and operations data into dashboards and models that change what people do next.</p>
+
+    <div class="hero-meta">
+      <span class="pill">📍 <b>Dubai, UAE</b></span>
+      <span class="pill">💼 <b>2+ yrs</b> Data Analytics</span>
+      <span class="pill">⚙️ <b>3+ yrs</b> Full-Stack Engineering</span>
+      <span class="pill">🪪 UAE Visa: <b>Transferable</b></span>
+    </div>
+
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#dashboards">View Dashboards ↓</a>
+      <a class="btn btn-ghost" href="mailto:abdur.form123@gmail.com">Get in Touch</a>
+    </div>
+
+    <div class="kpi-strip">
+      <div class="kpi"><div class="num" data-count="40">0%</div><div class="label">Repeat-Caller Reduction</div></div>
+      <div class="kpi"><div class="num" data-count="30">0%</div><div class="label">First Call Resolution Lift</div></div>
+      <div class="kpi"><div class="num" data-count="3">0</div><div class="label">Power BI Dashboards Shipped</div></div>
+      <div class="kpi"><div class="num" data-count="550">0K+</div><div class="label">Records Analyzed (Case Studies)</div></div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-tag">// About</div>
+      <h2>From shipping code to shipping insight.</h2>
+    </div>
+    <div class="about-grid reveal">
+      <div class="avatar">AR</div>
+      <div class="about-text">
+        <p>I started as a <strong>full-stack engineer</strong> — three years building backend systems and microservices at Tata Research Development and Design Centre, where I learned how data is actually produced, stored, and broken in production systems. That turned out to be the best possible training for analytics: I don't just read dashboards, I understand what's happening upstream when a number looks wrong.</p>
+        <p>Today I work as a <strong>Data Analyst at Etisalat by e&amp;</strong>, the UAE's leading telecom operator, where I use SQL, Snowflake, and Power BI to turn millions of customer interaction records into decisions — work that's helped cut repeat-caller volume by 40% and lift First Call Resolution by 30%.</p>
+        <p>Alongside that, I build independent <strong>machine learning projects</strong> end-to-end — from a deployed real-estate price predictor to healthcare and retail analytics case studies — because I'd rather demonstrate a skill than describe it. Currently based in Dubai on a transferable employment visa, and open to Data Analyst / Data Scientist roles across UAE-based MNCs, with particular interest in healthcare and operations-heavy domains.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-tag">// Stack</div>
+      <h2>Tools I reach for.</h2>
+      <p>Not an exhaustive list — the ones I actually use weekly.</p>
+    </div>
+    <div class="skill-cols reveal">
+      <div class="skill-col">
+        <h3>Data &amp; Analytics</h3>
+        <ul>
+          <li>SQL &amp; Power BI</li>
+          <li>Python (Pandas, NumPy)</li>
+          <li>Snowflake / PostgreSQL / MySQL</li>
+          <li>Excel &amp; EDA</li>
+          <li>Statistical Modeling</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h3>Machine Learning</h3>
+        <ul>
+          <li>scikit-learn</li>
+          <li>NLP &amp; SVM</li>
+          <li>Matplotlib / Seaborn</li>
+          <li>Generative AI</li>
+          <li>Flask Model Deployment</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h3>Engineering</h3>
+        <ul>
+          <li>Java &amp; Spring Boot</li>
+          <li>Angular</li>
+          <li>REST API &amp; Microservices</li>
+          <li>Git / GitHub / GitLab CI</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-tag">// Experience</div>
+      <h2>Where the work happened.</h2>
+    </div>
+
+    <div class="reveal">
+      <div class="xp-item">
+        <div>
+          <div class="xp-date">Mar 2024 — Present</div>
+        </div>
+        <div>
+          <div class="xp-role">Data Analyst</div>
+          <div class="xp-co">Etisalat by e&amp; (Emirates Telecommunications Group)</div>
+          <div class="xp-loc">Dubai, UAE</div>
+          <ul class="xp-bullets">
+            <li>Analyzed large-scale telecom datasets (SQL, Snowflake) to cut repeat-caller volume from 50% to 30% and dispatch/escalation cases by 30%, while raising First Call Resolution by 30%.</li>
+            <li>Built predictive intervention models enabling proactive resolution of 10% of customer calls, and developed Power BI/Excel dashboards to communicate KPIs to stakeholders.</li>
+            <li>Migrated reporting workloads to Snowflake cloud data warehousing, improving query performance on large telecom datasets.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="xp-item">
+        <div>
+          <div class="xp-date">Sep 2021 — Feb 2024</div>
+        </div>
+        <div>
+          <div class="xp-role">Full Stack Java Developer</div>
+          <div class="xp-co">Tata Research Development and Design Centre</div>
+          <div class="xp-loc">India</div>
+          <ul class="xp-bullets">
+            <li>Built backend modules and microservices for PREMAP, an enterprise IT platform for engineered materials design, using Java, Spring Boot, MySQL, and PostgreSQL.</li>
+            <li>Re-architected a monolith into independent microservices, improving scalability and release velocity; cut object setup time and improved experiment speed by 27% via multi-threaded initialization.</li>
+            <li>Delivered responsive front-end interfaces in Angular, HTML, and CSS, and led code reviews to uphold quality standards.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="xp-item">
+        <div>
+          <div class="xp-date">Apr 2020 — Jun 2020</div>
+        </div>
+        <div>
+          <div class="xp-role">Research Intern — Machine Learning</div>
+          <div class="xp-co">Indian Institute of Information Technology (IIIT), Allahabad</div>
+          <div class="xp-loc">India</div>
+          <ul class="xp-bullets">
+            <li>Built an ML model for early Autism Spectrum Disorder (ASD) screening using a minimal questionnaire feature set; delivered a desktop application for screening support.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="dashboards">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-tag">// Power BI</div>
+      <h2>Dashboards, live.</h2>
+      <p>Click through the embeds below — these are the actual published reports, not screenshots pretending to be interactive.</p>
+    </div>
+
+    <!-- PROJECT: Massachusetts General Hospital -->
+    <div class="proj reveal">
+      <div class="proj-head">
+        <div class="proj-kicker">Healthcare Analytics · Power BI</div>
+        <div class="proj-title">Massachusetts General Hospital — Admissions &amp; Cost Analytics</div>
+        <p class="proj-desc">A 3-page operational dashboard tracking patient admissions, readmissions, insurance coverage, and procedure costs — built to help hospital administrators spot cost and care-quality patterns by demographic and payer.</p>
+        <div class="proj-tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">Healthcare</span>
+          <span class="tag">Cost Analytics</span>
+          <span class="tag">Insurance Coverage</span>
+        </div>
+      </div>
+      <div class="proj-kpis">
+        <div class="proj-kpi"><div class="num">28K</div><div class="label">Total Admissions</div></div>
+        <div class="proj-kpi"><div class="num">$101.51M</div><div class="label">Total Cost of Encounter</div></div>
+        <div class="proj-kpi"><div class="num">30.63%</div><div class="label">Cost Covered by Insurance</div></div>
+        <div class="proj-kpi"><div class="num">17K</div><div class="label">30-Day Readmissions</div></div>
+        <div class="proj-kpi"><div class="num">974</div><div class="label">Unique Patients Tracked</div></div>
+      </div>
+      <div class="proj-media">
+        <div class="proj-embed-wrap">
+          <iframe title="Massachusetts General Hospital Power BI Dashboard" src="https://app.powerbi.com/view?r=eyJrIjoiMjkzYzEzNDAtOTE0ZS00NTNhLWJlNWQtYTI5N2FmOGZjMzY1IiwidCI6ImRmODY3OWNkLWE4MGUtNDVkOC05OWFjLWM4M2VkN2ZmOTVhMCJ9&pageName=ReportSection" height="560" loading="lazy" allowfullscreen></iframe>
+        </div>
+        <div class="insight-box">
+          <div class="ib-label">Why this matters for healthcare ops</div>
+          <p>Electrical cardioversion is the single highest-cost procedure type ($35.8M total) despite a moderate volume (1,383 procedures) — flagging it as a priority for cost-review. Medicare and Medicaid carry the largest share of covered cost, while ~30% of total encounter cost overall falls outside insurance coverage, a gap worth surfacing to finance and patient-billing teams.</p>
+        </div>
+      </div>
+      <div class="proj-actions">
+        <a class="primary" href="https://app.powerbi.com/view?r=eyJrIjoiMjkzYzEzNDAtOTE0ZS00NTNhLWJlNWQtYTI5N2FmOGZjMzY1IiwidCI6ImRmODY3OWNkLWE4MGUtNDVkOC05OWFjLWM4M2VkN2ZmOTVhMCJ9&pageName=ReportSection" target="_blank" rel="noopener">Open Full Screen ↗</a>
+      </div>
+    </div>
+
+    <!-- PROJECT: Adventure Works -->
+    <div class="proj reveal">
+      <div class="proj-head">
+        <div class="proj-kicker">Retail Sales Analytics · Power BI</div>
+        <div class="proj-title">Adventure Works Cycles — Sales &amp; Customer Intelligence</div>
+        <p class="proj-desc">A 3-page executive dashboard covering sales performance, single-product drill-through with a price what-if simulator, and customer demographic segmentation across a global bike retailer's order history (2016–2017).</p>
+        <div class="proj-tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">Retail</span>
+          <span class="tag">What-If Analysis</span>
+          <span class="tag">Customer Segmentation</span>
+        </div>
+      </div>
+      <div class="proj-kpis">
+        <div class="proj-kpi"><div class="num">$1.83M</div><div class="label">Monthly Revenue</div></div>
+        <div class="proj-kpi"><div class="num">2,146</div><div class="label">Monthly Orders</div></div>
+        <div class="proj-kpi"><div class="num">166</div><div class="label">Monthly Returns</div></div>
+        <div class="proj-kpi"><div class="num">353</div><div class="label">Customers Tracked</div></div>
+      </div>
+      <div class="proj-media">
+        <div class="proj-shot-grid">
+          <div>
+            <div class="proj-shot"><img src="assets/adventure-works-1.jpg" alt="Adventure Works sales overview dashboard" loading="lazy"></div>
+            <div class="shot-caption">Sales Overview</div>
+          </div>
+          <div>
+            <div class="proj-shot"><img src="assets/adventure-works-2.jpg" alt="Adventure Works product drill-through with price what-if simulator" loading="lazy"></div>
+            <div class="shot-caption">Product Drill-Through + Price Simulator</div>
+          </div>
+        </div>
+        <div class="insight-box">
+          <div class="ib-label">Signature feature</div>
+          <p>Page 2 includes a price-adjustment slider that recalculates projected weekly profit in real time — a what-if simulation layer on top of static reporting, letting a category manager test pricing decisions before making them.</p>
+        </div>
+      </div>
+      <div class="proj-actions">
+        <a class="primary" href="https://mavenshowcase.com/project/17515" target="_blank" rel="noopener">View Full Report ↗</a>
+      </div>
+    </div>
+
+    <!-- PROJECT: Northwind -->
+    <div class="proj reveal">
+      <div class="proj-head">
+        <div class="proj-kicker">Logistics &amp; Distribution Analytics · Power BI</div>
+        <div class="proj-title">Northwind Traders — Order &amp; Shipment Performance</div>
+        <p class="proj-desc">A 3-page dashboard tracking global order volume, shipment delays by carrier, and customer-level revenue concentration for a food distribution business — with drill-through from category → product → customer.</p>
+        <div class="proj-tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">Logistics</span>
+          <span class="tag">Shipment Tracking</span>
+          <span class="tag">Drill-Through Design</span>
+        </div>
+      </div>
+      <div class="proj-kpis">
+        <div class="proj-kpi"><div class="num">$1.35M</div><div class="label">Total Revenue</div></div>
+        <div class="proj-kpi"><div class="num">8.5</div><div class="label">Avg Shipping Days</div></div>
+        <div class="proj-kpi"><div class="num">92</div><div class="label">Delayed Shipments</div></div>
+        <div class="proj-kpi"><div class="num">830</div><div class="label">Total Orders</div></div>
+      </div>
+      <div class="proj-media">
+        <div class="proj-shot"><img src="assets/northwind-1.jpg" alt="Northwind Traders order and shipment overview dashboard" loading="lazy"></div>
+        <div class="insight-box">
+          <div class="ib-label">Operational insight surfaced</div>
+          <p>United Package carries the highest order volume (296) but also the highest absolute delay count (30) — visible immediately via the red/no-delay split bar, making it easy for ops teams to flag a carrier-performance conversation.</p>
+        </div>
+      </div>
+      <div class="proj-actions">
+        <a class="primary" href="https://mavenshowcase.com/project/5414" target="_blank" rel="noopener">View Full Report ↗</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-tag">// Machine Learning</div>
+      <h2>Models I've shipped.</h2>
+      <p>Code and live demos — click through to interact, not just read about them.</p>
+    </div>
+
+    <div class="proj reveal" style="margin-bottom:32px;">
+      <div class="proj-head">
+        <div class="proj-kicker">End-to-End ML · Deployed</div>
+        <div class="proj-title">Real Estate Price Prediction System</div>
+        <p class="proj-desc">A deployed Linear Regression model that predicts Bangalore home prices in real time. Built the full pipeline myself: data cleaning, outlier detection, feature engineering, dimensionality reduction, GridSearchCV hyperparameter tuning, and a Flask API serving a live web interface.</p>
+        <div class="proj-tags">
+          <span class="tag">Python</span>
+          <span class="tag">scikit-learn</span>
+          <span class="tag">Flask</span>
+          <span class="tag">GridSearchCV</span>
+          <span class="tag">Deployed on Streamlit</span>
+        </div>
+      </div>
+      <div class="proj-actions" style="padding-top:24px;">
+        <a class="primary" href="https://real-estate-prediction-ml-project-kgpw43q3mh2vmgt6mgmzci.streamlit.app/" target="_blank" rel="noopener">Launch Live Demo ↗</a>
+        <a href="https://github.com/Abdur1503/Real-estate-prediction-ml-project/tree/gh-pages" target="_blank" rel="noopener">View Code on GitHub</a>
+      </div>
+    </div>
+
+    <div class="mini-grid reveal">
+      <div class="mini-card">
+        <h3>Netflix Content Strategy</h3>
+        <p>Analyzed global genre distribution to find Dramas dominate worldwide, while Anime (Japan) and Korean TV Shows (South Korea) reflect strong local preference — supporting region-specific content strategy.</p>
+        <div class="proj-tags"><span class="tag">Pandas</span><span class="tag">Seaborn</span></div>
+        <div class="mini-links"><a href="https://github.com/Abdur1503/data-analysis-case-studies/tree/main" target="_blank" rel="noopener">View Notebook ↗</a></div>
+      </div>
+      <div class="mini-card">
+        <h3>Walmart Consumer Insights</h3>
+        <p>Analyzed 550K+ transactions using Box-Cox transformation and confidence intervals — found ~75% of purchases came from male customers and revealed a long-tail product distribution.</p>
+        <div class="proj-tags"><span class="tag">Statistical Testing</span><span class="tag">Python</span></div>
+        <div class="mini-links"><a href="https://github.com/Abdur1503/data-analysis-case-studies/tree/main" target="_blank" rel="noopener">View Notebook ↗</a></div>
+      </div>
+      <div class="mini-card">
+        <h3>Aerofit Customer Segmentation</h3>
+        <p>Segmented treadmill buyers by age, fitness, and income. Found budget-conscious younger buyers favor KP281, while high-income fit individuals favor KP781 — 85% of buyers aged 20–40.</p>
+        <div class="proj-tags"><span class="tag">Confidence Intervals</span><span class="tag">Segmentation</span></div>
+        <div class="mini-links"><a href="https://github.com/Abdur1503/data-analysis-case-studies/tree/main" target="_blank" rel="noopener">View Notebook ↗</a></div>
+      </div>
+      <div class="mini-card">
+        <h3>Yulu Bike Demand Forecasting</h3>
+        <p>Analyzed 10,000+ hourly rental records with Mann–Whitney U tests — found peak usage at 8AM and 5–6PM commute windows, with seasonal demand highest in summer.</p>
+        <div class="proj-tags"><span class="tag">Time-Series</span><span class="tag">Hypothesis Testing</span></div>
+        <div class="mini-links"><a href="https://github.com/Abdur1503/data-analysis-case-studies/tree/main" target="_blank" rel="noopener">View Notebook ↗</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-tag">// Education</div>
+      <h2>Background.</h2>
+    </div>
+    <div class="reveal">
+      <div class="edu-item">
+        <div>
+          <div class="edu-deg">MS, Computer Science</div>
+          <div class="edu-school">Woolf University, Malta</div>
+        </div>
+        <div class="edu-date">2027 (Expected)</div>
+      </div>
+      <div class="edu-item">
+        <div>
+          <div class="edu-deg">B.Tech / BE, Computer Science &amp; Engineering</div>
+          <div class="edu-school">United College of Engineering &amp; Research, Allahabad, India</div>
+        </div>
+        <div class="edu-date">2021</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-head reveal">
+      <h2>Let's talk about your data.</h2>
+      <p>Open to Data Analyst / Data Scientist roles across UAE-based MNCs — currently based in Dubai on a transferable employment visa.</p>
+    </div>
+    <div class="contact-row reveal">
+      <a class="contact-link" href="mailto:abdur.form123@gmail.com">✉ abdur.form123@gmail.com</a>
+      <a class="contact-link" href="tel:+971556090149">📱 +971-55-6090149</a>
+      <a class="contact-link" href="https://www.linkedin.com/in/abdur-rehman-181567188/" target="_blank" rel="noopener">in LinkedIn</a>
+      <a class="contact-link" href="https://github.com/Abdur1503" target="_blank" rel="noopener">⌥ GitHub</a>
+      <a class="contact-link" href="https://scaler.com/academy/profile/3a9d30ae12d2" target="_blank" rel="noopener">◆ Scaler Profile</a>
+    </div>
+    <div class="foot-note">
+      <span>Abdur Rehman — Dubai, UAE</span>
+      <span>Built &amp; designed by hand, no template.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // KPI count-up
+  const kpiNums = document.querySelectorAll('.kpi .num');
+  const animateCount = (el) => {
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.textContent.replace(/[0-9.]/g, '');
+    const dur = 1100;
+    const start = performance.now();
+    const step = (now) => {
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = Math.round(target * eased);
+      el.textContent = val + suffix;
+      if(p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const kpiIo = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ animateCount(e.target); kpiIo.unobserve(e.target); }
+    });
+  }, { threshold: 0.5 });
+  kpiNums.forEach(el => kpiIo.observe(el));
+</script>
+
+</body>
+</html>
